@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import Profile from './Profile';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      members: ""
+      members: []
     };
   }
 
@@ -20,38 +21,30 @@ class Dashboard extends Component {
     request.send();
     request.onload = function() {
       var members = request.response;
-      console.log(members);
-      console.log(typeof(members));
-      var members_string = JSON.stringify(members);
-      console.log(members_string);
       this.setState({
-        members: members_string
+        members: members
       });
-    }.bind(this);
-  }
+      console.log(this.state.members[1].name);
 
-  renderMembers() {
-    console.log(this.state.members + "renderMembers")
-    return (
-      <p>
-        {this.state.members}
-      </p>
-    );
+    }.bind(this);
   }
 
   render() {
     return (
       <div className="Dashboard">
         <p>
-          This is the dashboard. {s}
+          This is the dashboard.
         </p>
-        <hr></hr>
-        {this.state.members}
+        {this.state.members.map(function(member) {
+          return (
+            <div key={member.url} className="member">
+              {member.name}
+            </div>
+          )
+        })}
       </div>
     );
   }
 }
-
-var s = "omg"
 
 export default Dashboard;
