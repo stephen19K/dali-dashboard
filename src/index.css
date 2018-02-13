@@ -4,4 +4,5 @@ body {
   font-family: sans-serif;
 }
 
-#mapid { height: 500px; }
+#mapid {
+  height: 500px; }

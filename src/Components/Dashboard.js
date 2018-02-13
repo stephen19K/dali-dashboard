@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Profile from './Profile';
+import MainMap from './MainMap.js';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class Dashboard extends Component {
         <p>
           This is the dashboard.
         </p>
+        <MainMap />
         {this.state.members.map(function(member) {
           return (
             <div key={member.url} className="member">
