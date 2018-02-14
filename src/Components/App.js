@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Dashboard from './Dashboard.js';
-import logo from '../../src/logo.svg';
 import MainMap from './MainMap.js';
 import '../../src/App.css';
 
