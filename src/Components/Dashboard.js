@@ -31,18 +31,15 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="Dashboard">
-        <p>
-          This is the dashboard.
-        </p>
         <MainMap />
-        {this.state.members.map(function(member) {
-          return (
-            <div key={member.url} className="member">
-              {member.name}: {member.lat_long}
-            </div>
-          )
-        })}
       </div>
+        // {this.state.members.map(function(member) {
+        //   return (
+        //     <div key={member.url} className="member">
+        //       {member.name}: {member.lat_long}
+        //     </div>
+        //   )
+        // })}
     );
   }
 }
