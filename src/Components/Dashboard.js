@@ -25,8 +25,6 @@ class Dashboard extends Component {
       this.setState({
         members: members
       });
-      console.log(this.state.members[1].name);
-
     }.bind(this);
   }
 
@@ -40,7 +38,7 @@ class Dashboard extends Component {
         {this.state.members.map(function(member) {
           return (
             <div key={member.url} className="member">
-              {member.name}
+              {member.name}: {member.lat_long}
             </div>
           )
         })}

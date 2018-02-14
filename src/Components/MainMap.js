@@ -1,23 +1,60 @@
 import React, { Component } from 'react';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
 export default class MainMap extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        members: [],
+        lat: 51.505,
+        lng: -0.09,
+        zoom: 13,
+      }
+    }
 
-  componentDidMount() {
-    console.log("this is running");
+    componentDidMount() {
+      this.setMembers();
+    }
 
-    var mymap = L.map('mapid').setView([37.492701, 127.055297], 10);
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1Ijoic3RlcGhlbjE5ayIsImEiOiJjamRjanBsN2w0MXc5MzNxcjQzOGpiajlmIn0.DNRq_EXoiD1l1lv__unZEg'
-  }).addTo(mymap);
+    setMembers() {
+      var requestURL = 'http://mappy.dali.dartmouth.edu/members.json'
+      var request = new XMLHttpRequest();
+      request.open('GET', requestURL);
+      request.responseType = 'json';
+      request.send();
+      request.onload = function() {
+        var members = request.response;
+        this.setState({
+          members: members
+        });
+      }.bind(this);
+    }
+
+
+    render() {
+      console.log("mainmap: " + this.state.members);
+      const position = [this.state.lat, this.state.lng]
+      return (
+        <Map id="mapid" center={position} zoom={this.state.zoom}>
+          <TileLayer
+            attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {this.state.members.map(function(member) {
+            return (
+              <div key={member.url} className="member">
+                <Marker position={member.lat_long}>
+                  <Popup>
+                    <p>
+                      {member.name}
+                    </p>
+                  </Popup>
+                </Marker>
+              </div>
+            )
+          })}
+        </Map>
+      )
+    }
   }
-
-  render() {
-    return (
-      <div id="mapid"></div>
-    )
-  }
-}
