@@ -6,31 +6,7 @@
   padding: 0;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 10s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
+/* Leaflet styling */
 .map {
   height: 100vh;
   width: 100%;
@@ -43,4 +19,8 @@
   width: 100%;
   margin: 0px;
   padding: 0px;
+}
+
+.icon {
+  border-radius: 10px;
 }
