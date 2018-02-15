@@ -63,7 +63,7 @@ export default class MainMap extends Component {
                   <Marker
                     position={member.lat_long}
                     icon={L.icon({
-                      iconUrl: "https://raw.githubusercontent.com/dali-lab/mappy/gh-pages/" + member.iconUrl,
+                      iconUrl: member.iconUrl,
                       iconSize:[100, 100],
                       popupAnchor: [0, -30],
                     })}
