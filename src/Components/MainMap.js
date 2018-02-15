@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Popup, LayerGroup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup, LayerGroup, Tooltip } from 'react-leaflet';
 import '../App.css';
 import L from 'leaflet';
 
@@ -64,15 +64,24 @@ export default class MainMap extends Component {
                     position={member.lat_long}
                     icon={L.icon({
                       iconUrl: member.iconUrl,
-                      iconSize:[100, 100],
+                      iconSize: [50, 50],
                       popupAnchor: [0, -30],
+                      className: 'icon',
                     })}
+                    riseOnHover={true}
                     >
                     <Popup>
                       <p>
-                        {member.name}
+                        {member.message}
                       </p>
                     </Popup>
+                    <Tooltip
+                      offset={[25, 0]}
+                      >
+                      <span>
+                        {member.name}: {member.message}
+                      </span>
+                    </Tooltip>
                   </Marker>
                 </div>
               )
