@@ -8,10 +8,14 @@ export default class MainMap extends Component {
       super(props);
       this.state = {
         members: [],
-        lat: 20.2258,
-        lng: -74.1534,
-        zoom: 5,
+        lat: 43.7022,
+        lng: -72.2896,
+        zoom: 8,
       }
+    }
+
+    handleClick = () => {
+      console.log(this.state.lat);
     }
 
     componentDidMount() {
@@ -32,21 +36,12 @@ export default class MainMap extends Component {
       }.bind(this);
     }
 
-    // this.refs.markers.eachLayer(function(marker) {
-    //   marker.on('mouseover', function (e) {
-    //     e.target.openPopup();
-    //   });
-    //   marker.on('mouseout', function (e) {
-    //     e.target.closePopup();
-    //   });
-    // })
-
     render() {
-      console.log("mainmap: " + this.state.members);
       const position = [this.state.lat, this.state.lng]
       return (
         <div className="map">
           <Map
+            onClick={this.handleClick}
             id="mapid"
             center={position}
             zoom={this.state.zoom}>
@@ -71,12 +66,19 @@ export default class MainMap extends Component {
                     riseOnHover={true}
                     >
                     <Popup>
-                      <p>
-                        {member.message}
-                      </p>
+                      <span>
+                        {member.name}
+                        <br></br>
+                        On Terms: {member.terms_on}
+                        <br></br>
+                        Projects: {member.project}
+                        <br></br>
+                        <a href={member.url}>{member.url}</a>
+                      </span>
                     </Popup>
                     <Tooltip
                       offset={[25, 0]}
+                      direction="right"
                       >
                       <span>
                         {member.name}: {member.message}
