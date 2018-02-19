@@ -6,6 +6,7 @@ import L from 'leaflet';
 export default class MainMap extends Component {
     constructor(props) {
       super(props);
+      // Initialize location to Hanover
       this.state = {
         members: [],
         lat: 43.7022,
@@ -14,14 +15,11 @@ export default class MainMap extends Component {
       }
     }
 
-    handleClick = () => {
-      console.log(this.state.lat);
-    }
-
     componentDidMount() {
       this.setMembers();
     }
 
+    // load JSON file into this.state.members
     setMembers() {
       var requestURL = 'http://mappy.dali.dartmouth.edu/members.json'
       var request = new XMLHttpRequest();
@@ -41,7 +39,6 @@ export default class MainMap extends Component {
       return (
         <div className="map">
           <Map
-            onClick={this.handleClick}
             id="mapid"
             center={position}
             zoom={this.state.zoom}>
@@ -52,6 +49,8 @@ export default class MainMap extends Component {
             <LayerGroup
               ref="markers"
               >
+            // For each member in the members array, return a Marker with
+            // their parsed information
             {this.state.members.map(function(member) {
               return (
                 <div key={member.url} className="member">
